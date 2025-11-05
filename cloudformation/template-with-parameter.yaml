@@ -218,7 +218,7 @@ Resources:
     Type: AWS::IAM::Role
     Properties:
       Path: "/"
-      RoleName: WebappRole
+      RoleName: !Sub ${AWS::StackName}-WebappRole
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -247,7 +247,7 @@ Resources:
       Type: AWS::IAM::Role
       Properties:
           Path: "/"
-          RoleName: CodeDeployRoleforGitHub
+          RoleName: !Sub ${AWS::StackName}-CodeDeployRoleforGitHub
           AssumeRolePolicyDocument:
              Statement:
                - Effect: Allow
@@ -376,7 +376,7 @@ Resources:
   WebappLaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
     Properties:
-      LaunchTemplateName: WebappLaunchTemplate
+      LaunchTemplateName: !Sub ${AWS::StackName}-WebappLaunchTemplate
       LaunchTemplateData:
         ImageId: !Ref ImageId
         InstanceType: !Ref InstanceType
@@ -471,7 +471,7 @@ Resources:
         - Ref: ALBTargetGroup
       Tags:
         - Key: Name
-          Value: webapp-example
+          Value: !Sub ${AWS::StackName}-webapp-example
           PropagateAtLaunch: true
   ALBListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
